@@ -256,7 +256,30 @@
         <div class="is-vcentered interpolation-panel">
           <div class="content has-text-justified">
             <p style = "font-size: 18px">
-              Our propostition is that the policy learned from an imbalanced dataset is biased by the behaviors that are more frequently represented in the dataset. This comes at the cost of the policy ignoring the underrepresented behaviors. Let the behaviors be formulated as sub-policies \(\pi_i(a\mid s_i)\) of the human, i.e., humans use different sub-policies to demonstrate different behaviors. For example, when demonstrating how to organize a table, humans use sub-policy \(\pi_1(a\mid s_1)\) to demonstrate picking up an object and sub-policy \(\pi_2(a\mid s_2)\) to demonstrate opening a drawer.
+              Our propostition is that the policy learned from an imbalanced dataset is biased by the behaviors that are more frequently represented in the dataset. This comes at the cost of the policy ignoring the underrepresented behaviors. We formulate the behaviors as sub-policies \(\pi_i(a\mid s_i)\) of the human, i.e., humans use different sub-policies to demonstrate different behaviors. For example, when demonstrating how to organize a table, humans use sub-policy \(\pi_1(a\mid s_1)\) to demonstrate picking up an object and sub-policy \(\pi_2(a\mid s_2)\) to demonstrate opening a drawer. Assuming that these sub-policies are Gaussian, when we learn a policy \(\pi_{\theta}\) on an imbalanced dataset, the optimal value of the parameter \(\theta\) is \(\sum_{i=1}^{k} \rho_i \cdot \theta_i\) where \(\rho\) is the joint probability denisty of states and actions from sub-policy \(\pi_i\). For a detailed proof, please refer to our paper.
+            </p>
+          </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <h2 class="title is-2" style="text-align: center;">What is Important for Balancing Datasets?</h2>
+        <tr>
+          <td>
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <img src="./static/images/method.png" style="width: 95%;"></img>
+            </div>
+          </td>
+        </tr>
+        <div class="is-vcentered interpolation-panel">
+          <div class="content has-text-justified">
+            <p style = "font-size: 18px">
+              One straightforward way to balance a dataset is to equally weight each behavior. This means we can upsample the underrepresented behaviors until the joint probability density of states and actions for each of the \(k\) sub-policies becomes equal to \(\frac{1}{k}\). This method is inspired from the common approach used in class imbalance problems in classification tasks. However, in imitation learning it can be limiting because it does not take into consideration the relative difficulty of different behaviors. For example, consider a dataset containing two sub-tasks of varying difficulty: throwing a ball at a moving target (hard) and dropping the ball into a large stationary bin (easy). Typically, the robot would require more data and training iterations to learn the first subtask than the second. Due to this, when we train the robot by giving equal weight to both subtasks, the robot may still learn to drop the ball more accurately than throwing. Instead, we want to dynamically change the weights for each behavior based on their relative difficulty. we increase the weights for sub-policies that have a higher expected loss by maximizing the following objective:
+              \(\mathcal{L}_{eq-l} = \sum_{i=1}^{k} \alpha_{i} \left( \mathbb{E}_{(s,a) \sim\mathcal{D}_{i}} D_{KL} (\pi_{i} || \pi_{\theta}) - \mathcal{L}_{i}^{ref} \right)\)
+              Here, \(\mathcal{L}_{i}^{ref}) is the reference loss for each sub-policy and represents its desired accuracy.
             </p>
           </div>
         </div>
