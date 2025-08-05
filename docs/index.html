@@ -2,6 +2,7 @@
 <html>
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GK0WSDMTFY"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -241,6 +242,27 @@
 -->
 
 <section class="section">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <h2 class="title is-2" style="text-align: center;">Effect of Data Imbalance on Learned Policy</h2>
+        <tr>
+          <td>
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <img src="./static/images/method.png" style="width: 95%;"></img>
+            </div>
+          </td>
+        </tr>
+        <div class="is-vcentered interpolation-panel">
+          <div class="content has-text-justified">
+            <p style = "font-size: 18px">
+              Our propostition is that the policy learned from an imbalanced dataset is biased by the behaviors that are more frequently represented in the dataset. This comes at the cost of the policy ignoring the underrepresented behaviors. Let the behaviors be formulated as sub-policies \(\pi_i(a\mid s_i)\) of the human, i.e., humans use different sub-policies to demonstrate different behaviors. For example, when demonstrating how to organize a table, humans use sub-policy \(\pi_1(a\mid s_1)\) to demonstrate picking up an object and sub-policy \(\pi_2(a\mid s_2)\) to demonstrate opening a drawer.
+            </p>
+          </div>
+        </div>
+    </div>
+    </div>
+
     <div class="columns is-centered">
       <div class="column is-half">
         <h2 class="title is-2" style="text-align: center;">How Does it Work?</h2>
